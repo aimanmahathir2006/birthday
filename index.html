@@ -93,8 +93,36 @@
             color: #7a635a;
             max-width: 550px;
             line-height: 1.5;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-weight: 400;
+        }
+
+        /* Small Lyric Box Styling */
+        .lyric-box {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(229, 190, 190, 0.4);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            max-width: 420px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .lyric-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #b88686;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .lyric-text {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            font-style: italic;
+            color: #4a3c36;
+            line-height: 1.5;
         }
 
         .divider-container {
@@ -270,7 +298,8 @@
     <!-- Audio element with relative path primary source and hosted fallback -->
     <audio id="bg-music" loop preload="auto">
         <source src="Biar Seribu.mp3" type="audio/mpeg">
-        <source src="https://mizicool.github.io/maira/Biar%20Seribu.mp3" type="audio/mpeg">
+        <source src="https://aimanmahathir2006.github.io/maira/Biar%20Seribu.mp3" type="audio/mpeg">
+        <source src="https://cdn.jsdelivr.net/gh/aimanmahathir2006/maira@main/Biar%20Seribu.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -289,6 +318,12 @@
                 <h1 class="main-name">Maira</h1>
                 <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
                 
+                <!-- Lyric Box -->
+                <div class="lyric-box">
+                    <p class="lyric-title">Biar &mdash; Noh Salleh</p>
+                    <p class="lyric-text">&ldquo;Biar seribu tahun lagi, biar hingga akhir waktu, aku tetap di sini menunggumu...&rdquo;</p>
+                </div>
+
                 <div class="divider-container">
                     <div class="divider-line"></div>
                     <span class="heart-icon">&#9829;</span>
