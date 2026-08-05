@@ -35,7 +35,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px 80px 20px; /* Added extra bottom padding so content never touches controls */
+            padding: 40px 20px;
             flex-shrink: 0;
             position: relative;
         }
@@ -190,27 +190,21 @@
             font-style: italic;
         }
 
-        /* Centered Navigation Bar */
+        /* Navigation Controls Overlay */
         .nav-controls {
             position: fixed;
             bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 24px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 6px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(216, 184, 172, 0.3);
         }
 
         .nav-btn {
-            width: 32px;
-            height: 32px;
-            background-color: #2c1d18;
+            width: 36px;
+            height: 36px;
+            background-color: #1a1a1a;
             color: #ffffff;
             border: none;
             border-radius: 50%;
@@ -218,20 +212,22 @@
             align-items: center;
             justify-content: center;
             font-family: sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             user-select: none;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .nav-btn:hover:not(:disabled) {
+        .nav-btn:hover {
             transform: scale(1.1);
         }
 
         .nav-btn:disabled {
-            opacity: 0.2;
+            opacity: 0.3;
             cursor: not-allowed;
+            transform: none;
         }
 
         .page-indicator {
@@ -239,7 +235,6 @@
             color: #7a635a;
             letter-spacing: 0.1em;
             font-family: sans-serif;
-            font-weight: 600;
         }
     </style>
 </head>
@@ -325,7 +320,7 @@
         </section>
     </div>
 
-    <!-- Centered Navigation Controls -->
+    <!-- Bottom Right Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
         <span class="page-indicator" id="page-indicator">1 / 2</span>
