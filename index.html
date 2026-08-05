@@ -17,31 +17,41 @@
         body {
             font-family: 'Cormorant Garamond', serif;
             color: #2b1e1a;
-            overflow-x: hidden;
-            background-color: #fdf8f5;
+            overflow: hidden;
+            background-color: #e2d7d0; /* Subtle background contrast behind flipping page */
+            perspective: 2000px; /* 3D Perspective for Page Turning */
         }
 
-        /* Page Container & Smooth Transition Logic */
+        /* 3D Book Container Setup */
         .pages-wrapper {
-            display: flex;
-            width: 200vw;
-            min-height: 100vh;
-            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
         }
 
         .page {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100vw;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
-            flex-shrink: 0;
-            position: relative;
+            backface-visibility: hidden;
+            transform-origin: left center;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                        opacity 0.8s ease, 
+                        box-shadow 0.8s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
         }
 
-        /* PAGE 1 STYLES */
+        /* Page 1 (Front Page) */
         #page-1 {
+            z-index: 2;
+            transform: rotateY(0deg);
             background-color: #fdf8f5;
             background-image: 
                 radial-gradient(circle at center, rgba(255,230,225,0.8) 0%, rgba(253,248,245,1) 70%),
@@ -49,6 +59,31 @@
             background-size: cover;
         }
 
+        /* Page 1 Turned State */
+        #page-1.turned {
+            transform: rotateY(-180deg);
+            box-shadow: -20px 0 30px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+
+        /* Page 2 (Second Page) */
+        #page-2 {
+            z-index: 1;
+            background-color: #fdfaf6;
+            background-image: radial-gradient(circle at 85% 15%, rgba(255, 235, 225, 0.7) 0%, rgba(253, 250, 246, 1) 60%);
+        }
+
+        /* Inner Page Content Animation */
+        .card, .container {
+            transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+        }
+
+        #page-1.turned .card {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        /* PAGE 1 CONTENT STYLES */
         .card {
             text-align: center;
             max-width: 800px;
@@ -117,12 +152,7 @@
             margin: 0 10px;
         }
 
-        /* PAGE 2 STYLES */
-        #page-2 {
-            background-color: #fdfaf6;
-            background-image: radial-gradient(circle at 85% 15%, rgba(255, 235, 225, 0.7) 0%, rgba(253, 250, 246, 1) 60%);
-        }
-
+        /* PAGE 2 CONTENT STYLES */
         .container {
             max-width: 1000px;
             width: 100%;
@@ -220,7 +250,7 @@
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
-        .nav-btn:hover {
+        .nav-btn:hover:not(:disabled) {
             transform: scale(1.1);
         }
 
@@ -331,15 +361,19 @@
         let currentPage = 1;
         const totalPages = 2;
 
-        const wrapper = document.getElementById('wrapper');
+        const page1 = document.getElementById('page-1');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
 
         function updateView() {
-            wrapper.style.transform = `translateX(-${(currentPage - 1) * 100}vw)`;
+            if (currentPage === 2) {
+                page1.classList.add('turned');
+            } else {
+                page1.classList.remove('turned');
+            }
+
             indicator.textContent = `${currentPage} / ${totalPages}`;
-            
             prevBtn.disabled = currentPage === 1;
             nextBtn.disabled = currentPage === totalPages;
         }
