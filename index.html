@@ -359,7 +359,7 @@
                 <div class="lyric-box">
                     <p class="lyric-title">Biar &mdash; Noh Salleh</p>
                     <div class="lyrics-container" id="lyrics-container">
-                        <p class="lyric-line active">Loading lyrics...</p>
+                        <!-- Lyrics are rendered automatically here -->
                     </div>
                 </div>
 
@@ -465,51 +465,46 @@
 
         const lyricsContainer = document.getElementById('lyrics-container');
 
-        // Paths to the uploaded text file
-        const localTxtPath = "Noh Salleh - Biar Seribu.txt";
-        const githubTxtPath = "https://raw.githubusercontent.com/aimanmahathir2006/maira/main/Noh%20Salleh%20-%20Biar%20Seribu.txt";
-        const cdnTxtPath = "https://cdn.jsdelivr.net/gh/aimanmahathir2006/maira@main/Noh%20Salleh%20-%20Biar%20Seribu.txt";
+        // Embedded Lyrics Data (Edit your lyrics right here anytime!)
+        const songData = [
+            { time: 24, text: "Biar seribu tahun lagi" },
+            { time: 30, text: "Ku kan menunggu kau di sana" },
+            { time: 36, text: "Menghimpun duka dan lara" },
+            { time: 48, text: "Ingin biar seribu tahun lagi" },
+            { time: 54, text: "Ku kan terus katakan janji kita" },
+            { time: 60, text: "Berduaan kan selamanya bersama" },
+            { time: 72, text: "Dapatkah kau rasakan ini" },
+            { time: 78, text: "Sesuatu di antara kita" },
+            { time: 84, text: "Gema suara mata ke jiwa" },
+            { time: 90, text: "Ku terlena ku harap kau begitu juga ah" },
+            { time: 96, text: "Biar seribu tahun lagi" },
+            { time: 102, text: "Ku kan terus menyayangi dirimu" },
+            { time: 108, text: "Walaupun tahu ku takkan selamanya ada" },
+            { time: 120, text: "Dapatkah kau rasakan ini" },
+            { time: 126, text: "Sesuatu di antara kita" },
+            { time: 132, text: "Gema suara mata ke jiwa" },
+            { time: 138, text: "Ku terlena ku harap kau begitu juga oh" },
+            { time: 144, text: "Bagaikan matahari" },
+            { time: 150, text: "Ku setia menanti dikau yang ku cinta" },
+            { time: 156, text: "Bagaikan matahari ah" },
+            { time: 168, text: "Biar seribu tahun lagi" },
+            { time: 174, text: "Biar seribu tahun lagi" },
+            { time: 180, text: "Biar seribu" }
+        ];
 
-        // Estimated line timings (seconds) matching the song
-        const lineTimestamps = [24, 30, 36, 48, 54, 60, 72, 78, 84, 90, 96, 102, 108, 120, 126, 132, 138, 144, 150, 156, 168, 174, 180];
-
-        // Fetch and load lyrics dynamically from your text file
-        async function loadLyrics() {
-            let textData = "";
-            try {
-                let response = await fetch(localTxtPath);
-                if (!response.ok) throw new Error("Local fetch failed");
-                textData = await response.text();
-            } catch (e1) {
-                try {
-                    let response = await fetch(githubTxtPath);
-                    if (!response.ok) throw new Error("GitHub fetch failed");
-                    textData = await response.text();
-                } catch (e2) {
-                    try {
-                        let response = await fetch(cdnTxtPath);
-                        textData = await response.text();
-                    } catch (e3) {
-                        lyricsContainer.innerHTML = `<p class="lyric-line active">Error loading lyrics file.</p>`;
-                        return;
-                    }
-                }
-            }
-
-            const lines = textData.split('\n').filter(line => line.trim() !== '');
+        // Render lyrics dynamically
+        function renderLyrics() {
             lyricsContainer.innerHTML = '';
-
-            lines.forEach((lineText, index) => {
+            songData.forEach((item) => {
                 const p = document.createElement('p');
                 p.className = 'lyric-line';
-                const time = lineTimestamps[index] !== undefined ? lineTimestamps[index] : index * 5;
-                p.setAttribute('data-time', time);
-                p.textContent = lineText.trim();
+                p.setAttribute('data-time', item.time);
+                p.textContent = item.text;
                 lyricsContainer.appendChild(p);
             });
         }
 
-        loadLyrics();
+        renderLyrics();
 
         function toggleAudio() {
             if (audio.paused) {
