@@ -25,23 +25,17 @@
             min-height: 100vh;
         }
 
-        /* Ambient Animated Glow */
+        /* Ambient Glow */
         .ambient-glow {
             position: fixed;
             width: 70vw;
             height: 70vh;
-            background: radial-gradient(circle, rgba(216, 160, 160, 0.2) 0%, rgba(13, 8, 7, 0) 70%);
+            background: radial-gradient(circle, rgba(216, 160, 160, 0.18) 0%, rgba(13, 8, 7, 0) 70%);
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate3d(-50%, -50%, 0);
             pointer-events: none;
             z-index: 0;
-            animation: pulseGlow 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
         }
 
         /* Particles Layer */
@@ -55,11 +49,11 @@
             z-index: 1;
         }
 
-        /* 3D Scene Container */
+        /* 3D Stage Viewport */
         .scene {
             width: 100vw;
             height: 100vh;
-            perspective: 1200px;
+            perspective: 1400px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -74,6 +68,7 @@
             transform-style: preserve-3d;
         }
 
+        /* BASE PAGE STRUCTURE - GPU ACCELERATED */
         .page {
             position: absolute;
             top: 0;
@@ -85,16 +80,16 @@
             align-items: center;
             padding: 40px 20px;
             backface-visibility: hidden;
-            transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), 
-                        opacity 0.8s ease;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            will-change: transform, opacity;
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        /* PAGE 1 SLIDE POSITIONS */
+        /* PAGE 1 SLIDE STATE */
         #page-1 {
             z-index: 2;
-            transform: translateX(0%) translateZ(0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) scale(1);
             opacity: 1;
             background-color: #fdf8f5;
             background-image: 
@@ -103,65 +98,38 @@
             background-size: cover;
         }
 
-        /* PAGE 2 SLIDE POSITIONS */
+        /* PAGE 2 SLIDE STATE */
         #page-2 {
             z-index: 1;
-            transform: translateX(100%) translateZ(-200px) rotateY(-15deg);
+            transform: translate3d(100vw, 0, -100px) scale(0.95);
             opacity: 0;
             pointer-events: none;
             background-color: #fdfaf6;
             background-image: radial-gradient(circle at 85% 15%, rgba(255, 235, 225, 0.7) 0%, rgba(253, 250, 246, 1) 60%);
         }
 
-        /* 3D SLIDE STATE WHEN MOVING TO PAGE 2 */
+        /* ULTRA SMOOTH SLIDE TO PAGE 2 */
         body.show-page-2 #page-1 {
-            transform: translateX(-100%) translateZ(-200px) rotateY(15deg);
+            transform: translate3d(-100vw, 0, -100px) scale(0.95);
             opacity: 0;
             pointer-events: none;
         }
 
         body.show-page-2 #page-2 {
-            transform: translateX(0%) translateZ(0) rotateY(0deg);
+            transform: translate3d(0, 0, 0) scale(1);
             opacity: 1;
             pointer-events: auto;
             z-index: 3;
         }
 
-        /* CARD CONTENT AND MOUSE TILT WRAPPER */
-        .card-tilt-container {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.15s ease-out;
-            transform-style: preserve-3d;
-        }
-
+        /* PAGE 1 CONTENT */
         .card {
             text-align: center;
+            max-width: 800px;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform-style: preserve-3d;
-        }
-
-        /* INTRO FADE-IN ANIMATIONS FOR PAGE 1 */
-        .card > * {
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(25px) translateZ(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) translateZ(0);
-            }
         }
 
         .subtitle-top {
@@ -171,7 +139,6 @@
             color: #b88686;
             margin-bottom: 2rem;
             font-weight: 600;
-            animation-delay: 0.2s;
         }
 
         .script-heading {
@@ -182,7 +149,6 @@
             line-height: 1;
             margin-bottom: -0.2em;
             text-shadow: 0 0 1px rgba(209, 149, 149, 0.2);
-            animation-delay: 0.4s;
         }
 
         .main-name {
@@ -193,7 +159,6 @@
             line-height: 1;
             letter-spacing: -0.02em;
             margin-bottom: 2rem;
-            animation-delay: 0.6s;
         }
 
         .quote {
@@ -204,7 +169,6 @@
             line-height: 1.5;
             margin-bottom: 2.5rem;
             font-weight: 400;
-            animation-delay: 0.8s;
         }
 
         .divider-container {
@@ -213,7 +177,6 @@
             justify-content: center;
             width: 100%;
             max-width: 160px;
-            animation-delay: 1s;
         }
 
         .divider-line {
@@ -275,11 +238,11 @@
             display: flex;
             align-items: baseline;
             gap: 1.5rem;
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
         }
 
         .list-item:hover {
-            transform: translateX(8px);
+            transform: translate3d(6px, 0, 0);
         }
 
         .number {
@@ -301,7 +264,7 @@
             font-style: italic;
         }
 
-        /* GLASSMORPHISM FLOATING CONTROLS */
+        /* GLASS CONTROLS */
         .nav-controls {
             position: fixed;
             bottom: 30px;
@@ -310,12 +273,12 @@
             align-items: center;
             gap: 14px;
             z-index: 100;
-            background: rgba(25, 18, 16, 0.75);
-            backdrop-filter: blur(16px);
-            padding: 10px 20px;
+            background: rgba(25, 18, 16, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 8px 18px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
 
         .nav-btn {
@@ -333,13 +296,12 @@
             font-weight: bold;
             cursor: pointer;
             user-select: none;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s;
         }
 
         .nav-btn:hover:not(:disabled) {
-            transform: scale(1.15);
+            transform: scale(1.1);
             background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .nav-btn:disabled {
@@ -363,23 +325,21 @@
     <canvas id="particles-canvas"></canvas>
 
     <div class="scene">
-        <div class="pages-wrapper" id="wrapper">
+        <div class="pages-wrapper">
             <!-- PAGE 1 -->
             <section id="page-1" class="page">
-                <div class="card-tilt-container" id="tilt-container">
-                    <main class="card">
-                        <p class="subtitle-top">Today is your day</p>
-                        <h2 class="script-heading">Happy Birthday</h2>
-                        <h1 class="main-name">Maira</h1>
-                        <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
-                        
-                        <div class="divider-container">
-                            <div class="divider-line"></div>
-                            <span class="heart-icon">&#9829;</span>
-                            <div class="divider-line"></div>
-                        </div>
-                    </main>
-                </div>
+                <main class="card">
+                    <p class="subtitle-top">Today is your day</p>
+                    <h2 class="script-heading">Happy Birthday</h2>
+                    <h1 class="main-name">Maira</h1>
+                    <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
+                    
+                    <div class="divider-container">
+                        <div class="divider-line"></div>
+                        <span class="heart-icon">&#9829;</span>
+                        <div class="divider-line"></div>
+                    </div>
+                </main>
             </section>
 
             <!-- PAGE 2 -->
@@ -461,9 +421,7 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
-        const tiltContainer = document.getElementById('tilt-container');
 
-        // Page Navigation Logic
         function updateView() {
             if (currentPage === 2) {
                 body.classList.add('show-page-2');
@@ -504,21 +462,7 @@
             }
         });
 
-        // Interactive Mouse Parallax Tilt for Page 1 Card
-        document.addEventListener('mousemove', (e) => {
-            if (currentPage !== 1) return;
-            const xAxis = (window.innerWidth / 2 - e.clientX) / 30;
-            const yAxis = (window.innerHeight / 2 - e.clientY) / 30;
-            tiltContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
-        });
-
-        document.addEventListener('mouseleave', () => {
-            if (currentPage === 1) {
-                tiltContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            }
-        });
-
-        // Floating Ambient Particles Engine
+        // Lightweight Particles Canvas
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -529,27 +473,22 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        const particles = Array.from({ length: 45 }, () => ({
+        const particles = Array.from({ length: 30 }, () => ({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 0.5,
-            speedX: (Math.random() - 0.5) * 0.4,
-            speedY: -Math.random() * 0.5 - 0.2,
-            opacity: Math.random() * 0.5 + 0.2
+            size: Math.random() * 1.5 + 0.5,
+            speedY: -Math.random() * 0.3 - 0.1,
+            opacity: Math.random() * 0.4 + 0.2
         }));
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => {
-                p.x += p.speedX;
                 p.y += p.speedY;
-
                 if (p.y < 0) {
                     p.y = canvas.height;
                     p.x = Math.random() * canvas.width;
                 }
-                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-
                 ctx.fillStyle = `rgba(220, 175, 175, ${p.opacity})`;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
