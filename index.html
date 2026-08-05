@@ -459,13 +459,15 @@
         const indicator = document.getElementById('page-indicator');
 
         const audio = document.getElementById('bg-music');
+        audio.volume = 0.4; // Lowers the default volume to 40%
+
         const fixedAudioBtn = document.getElementById('fixed-audio-btn');
         const fixedAudioIcon = document.getElementById('fixed-audio-icon');
         const fixedAudioText = document.getElementById('fixed-audio-text');
 
         const lyricsContainer = document.getElementById('lyrics-container');
 
-        // Perfectly synced song timings converted from your exact timestamp file
+        // Synced song timings converted from your exact timestamp file
         const songData = [
             { time: 3.84, text: "Biar seribu tahun lagi" },
             { time: 11.63, text: "'Ku 'kan menunggu kau di sana" },
