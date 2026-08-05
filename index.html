@@ -63,7 +63,7 @@
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: #b88686;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-weight: 600;
         }
 
@@ -84,29 +84,31 @@
             color: #211512;
             line-height: 1;
             letter-spacing: -0.02em;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .quote {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
             font-style: italic;
             color: #7a635a;
             max-width: 550px;
             line-height: 1.5;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-weight: 400;
         }
 
-        /* Small Lyric Box Styling */
+        /* Synced Scroll Lyric Box */
         .lyric-box {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(229, 190, 190, 0.4);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            max-width: 420px;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(229, 190, 190, 0.5);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            max-width: 460px;
+            width: 90%;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            text-align: center;
         }
 
         .lyric-title {
@@ -114,15 +116,43 @@
             letter-spacing: 0.25em;
             text-transform: uppercase;
             color: #b88686;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
         }
 
-        .lyric-text {
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        .lyrics-container {
+            height: 110px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            padding: 10px 0;
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+
+        /* Hide Scrollbar */
+        .lyrics-container::-webkit-scrollbar {
+            display: none;
+        }
+        .lyrics-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .lyric-line {
+            font-size: 1.05rem;
             font-style: italic;
-            color: #4a3c36;
-            line-height: 1.5;
+            color: #9a8076;
+            padding: 6px 0;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .lyric-line.active {
+            color: #211512;
+            font-weight: 600;
+            font-size: 1.15rem;
+            opacity: 1;
+            transform: scale(1.03);
         }
 
         .divider-container {
@@ -318,10 +348,35 @@
                 <h1 class="main-name">Maira</h1>
                 <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
                 
-                <!-- Lyric Box -->
+                <!-- Synced Lyric Box -->
                 <div class="lyric-box">
                     <p class="lyric-title">Biar &mdash; Noh Salleh</p>
-                    <p class="lyric-text">&ldquo;Biar seribu tahun lagi, biar hingga akhir waktu, aku tetap di sini menunggumu...&rdquo;</p>
+                    <div class="lyrics-container" id="lyrics-container">
+                        <!-- Synced Lines -->
+                        <p class="lyric-line" data-time="24">Biar seribu tahun lagi</p>
+                        <p class="lyric-line" data-time="30">Ku kan menunggu kau di sana</p>
+                        <p class="lyric-line" data-time="36">Menghimpun duka dan lara</p>
+                        <p class="lyric-line" data-time="48">Ingin biar seribu tahun lagi</p>
+                        <p class="lyric-line" data-time="54">Ku kan terus katakan janji kita</p>
+                        <p class="lyric-line" data-time="60">Berduaan kan selamanya bersama</p>
+                        <p class="lyric-line" data-time="72">Dapatkah kau rasakan ini</p>
+                        <p class="lyric-line" data-time="78">Sesuatu di antara kita</p>
+                        <p class="lyric-line" data-time="84">Gema suara mata ke jiwa</p>
+                        <p class="lyric-line" data-time="90">Ku terlena ku harap kau begitu juga ah</p>
+                        <p class="lyric-line" data-time="96">Biar seribu tahun lagi</p>
+                        <p class="lyric-line" data-time="102">Ku kan terus menyayangi dirimu</p>
+                        <p class="lyric-line" data-time="108">Walaupun tahu ku takkan selamanya ada</p>
+                        <p class="lyric-line" data-time="120">Dapatkah kau rasakan ini</p>
+                        <p class="lyric-line" data-time="126">Sesuatu di antara kita</p>
+                        <p class="lyric-line" data-time="132">Gema suara mata ke jiwa</p>
+                        <p class="lyric-line" data-time="138">Ku terlena ku harap kau begitu juga oh</p>
+                        <p class="lyric-line" data-time="144">Bagaikan matahari</p>
+                        <p class="lyric-line" data-time="150">Ku setia menanti dikau yang ku cinta</p>
+                        <p class="lyric-line" data-time="156">Bagaikan matahari ah</p>
+                        <p class="lyric-line" data-time="168">Biar seribu tahun lagi</p>
+                        <p class="lyric-line" data-time="174">Biar seribu tahun lagi</p>
+                        <p class="lyric-line" data-time="180">Biar seribu</p>
+                    </div>
                 </div>
 
                 <div class="divider-container">
@@ -416,6 +471,9 @@
         const fixedAudioIcon = document.getElementById('fixed-audio-icon');
         const fixedAudioText = document.getElementById('fixed-audio-text');
 
+        const lyricsContainer = document.getElementById('lyrics-container');
+        const lyricLines = document.querySelectorAll('.lyric-line');
+
         function toggleAudio() {
             if (audio.paused) {
                 audio.play().then(() => {
@@ -433,6 +491,33 @@
         }
 
         fixedAudioBtn.addEventListener('click', toggleAudio);
+
+        /* Lyrics Sync & Auto-scroll Logic */
+        audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            let currentLine = null;
+
+            lyricLines.forEach((line, index) => {
+                const lineTime = parseFloat(line.getAttribute('data-time'));
+                const nextLineTime = lyricLines[index + 1] 
+                    ? parseFloat(lyricLines[index + 1].getAttribute('data-time')) 
+                    : Infinity;
+
+                if (currentTime >= lineTime && currentTime < nextLineTime) {
+                    line.classList.add('active');
+                    currentLine = line;
+                } else {
+                    line.classList.remove('active');
+                }
+            });
+
+            if (currentLine) {
+                const containerHeight = lyricsContainer.clientHeight;
+                const lineTop = currentLine.offsetTop;
+                const lineHeight = currentLine.clientHeight;
+                lyricsContainer.scrollTop = lineTop - (containerHeight / 2) + (lineHeight / 2);
+            }
+        });
 
         function updateView() {
             wrapper.style.transform = `translateX(-${(currentPage - 1) * 100}vw)`;
