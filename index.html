@@ -205,6 +205,9 @@
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             border: 1px solid rgba(229, 190, 190, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .song-title {
@@ -220,8 +223,37 @@
             letter-spacing: 0.25em;
             text-transform: uppercase;
             color: #b88686;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             font-weight: 600;
+        }
+
+        /* Audio Play/Pause Button */
+        .play-btn {
+            background-color: #2b1e1a;
+            color: #fdf8f5;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(43, 30, 26, 0.15);
+        }
+
+        .play-btn:hover {
+            background-color: #b54949;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(181, 73, 73, 0.25);
+        }
+
+        .play-btn-icon {
+            font-size: 0.9rem;
         }
 
         .lyric-quote {
@@ -230,6 +262,33 @@
             color: #4a3c36;
             line-height: 1.8;
             margin-bottom: 2rem;
+        }
+
+        /* Fixed Audio Control Button (Top Right) */
+        .audio-toggle-fixed {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(229, 190, 190, 0.5);
+            color: #2b1e1a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .audio-toggle-fixed:hover {
+            background: #ffffff;
+            transform: scale(1.05);
         }
 
         /* Navigation Controls Overlay */
@@ -281,6 +340,19 @@
     </style>
 </head>
 <body>
+
+    <!-- HTML5 Audio Element -->
+    <!-- Replace 'song.mp3' with your audio file path or URL -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Top Right Persistent Mute/Play Toggle -->
+    <button class="audio-toggle-fixed" id="fixed-audio-btn">
+        <span id="fixed-audio-icon">🎵</span>
+        <span id="fixed-audio-text">Play Music</span>
+    </button>
 
     <div class="pages-wrapper" id="wrapper">
         <!-- PAGE 1 -->
@@ -367,6 +439,12 @@
                 <p class="subtitle">A DEDICATED MELODY</p>
                 <h1 class="song-title">Biar</h1>
                 <p class="artist-name">Noh Salleh</p>
+
+                <!-- Dedicated Play Button -->
+                <button class="play-btn" id="song-play-btn">
+                    <span class="play-btn-icon" id="song-btn-icon">&#9654;</span>
+                    <span id="song-btn-text">Play Song</span>
+                </button>
                 
                 <blockquote class="lyric-quote">
                     &ldquo;Biar seribu tahun lagi<br>
@@ -399,6 +477,42 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
+
+        const audio = document.getElementById('bg-music');
+        const songPlayBtn = document.getElementById('song-play-btn');
+        const songBtnIcon = document.getElementById('song-btn-icon');
+        const songBtnText = document.getElementById('song-btn-text');
+
+        const fixedAudioBtn = document.getElementById('fixed-audio-btn');
+        const fixedAudioIcon = document.getElementById('fixed-audio-icon');
+        const fixedAudioText = document.getElementById('fixed-audio-text');
+
+        function updateAudioUI(isPlaying) {
+            if (isPlaying) {
+                songBtnIcon.innerHTML = '&#10074;&#10074;';
+                songBtnText.textContent = 'Pause Song';
+                fixedAudioIcon.textContent = '🔊';
+                fixedAudioText.textContent = 'Pause';
+            } else {
+                songBtnIcon.innerHTML = '&#9654;';
+                songBtnText.textContent = 'Play Song';
+                fixedAudioIcon.textContent = '🎵';
+                fixedAudioText.textContent = 'Play Music';
+            }
+        }
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                updateAudioUI(true);
+            } else {
+                audio.pause();
+                updateAudioUI(false);
+            }
+        }
+
+        songPlayBtn.addEventListener('click', toggleAudio);
+        fixedAudioBtn.addEventListener('click', toggleAudio);
 
         function updateView() {
             wrapper.style.transform = `translateX(-${(currentPage - 1) * 100}vw)`;
