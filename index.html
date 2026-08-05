@@ -267,9 +267,10 @@
 </head>
 <body>
 
-    <!-- Audio element using jsDelivr CDN to enable media streaming support -->
+    <!-- Audio element with relative path primary source and hosted fallback -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://cdn.jsdelivr.net/gh/mizicool/maira@main/Biar%20Seribu.mp3" type="audio/mpeg">
+        <source src="Biar Seribu.mp3" type="audio/mpeg">
+        <source src="https://mizicool.github.io/maira/Biar%20Seribu.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -386,7 +387,8 @@
                     fixedAudioIcon.textContent = '🔊';
                     fixedAudioText.textContent = 'Pause';
                 }).catch(err => {
-                    console.error("Playback failed: ", err);
+                    console.error("Audio playback error:", err);
+                    fixedAudioText.textContent = 'Error Loading';
                 });
             } else {
                 audio.pause();
