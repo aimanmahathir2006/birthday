@@ -18,42 +18,16 @@
             font-family: 'Cormorant Garamond', serif;
             color: #2b1e1a;
             overflow: hidden;
-            background-color: #fdf8f5;
+            background-color: #e2d7d0; /* Subtle background contrast behind flipping page */
+            perspective: 2000px; /* 3D Perspective for Page Turning */
         }
 
-        .ambient-glow {
-            position: fixed;
-            width: 70vw;
-            height: 70vh;
-            background: radial-gradient(circle, rgba(216, 160, 160, 0.18) 0%, rgba(253, 248, 245, 0) 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .scene {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            z-index: 2;
-        }
-
+        /* 3D Book Container Setup */
         .pages-wrapper {
-            width: 100%;
-            height: 100%;
             position: relative;
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
         }
 
         .page {
@@ -66,12 +40,18 @@
             justify-content: center;
             align-items: center;
             padding: 40px 20px;
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            backface-visibility: hidden;
+            transform-origin: left center;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), 
+                        opacity 0.8s ease, 
+                        box-shadow 0.8s ease;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
         }
 
+        /* Page 1 (Front Page) */
         #page-1 {
             z-index: 2;
-            opacity: 1;
+            transform: rotateY(0deg);
             background-color: #fdf8f5;
             background-image: 
                 radial-gradient(circle at center, rgba(255,230,225,0.8) 0%, rgba(253,248,245,1) 70%),
@@ -79,25 +59,31 @@
             background-size: cover;
         }
 
+        /* Page 1 Turned State */
+        #page-1.turned {
+            transform: rotateY(-180deg);
+            box-shadow: -20px 0 30px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+
+        /* Page 2 (Second Page) */
         #page-2 {
             z-index: 1;
-            opacity: 0;
-            pointer-events: none;
             background-color: #fdfaf6;
             background-image: radial-gradient(circle at 85% 15%, rgba(255, 235, 225, 0.7) 0%, rgba(253, 250, 246, 1) 60%);
         }
 
-        body.show-page-2 #page-1 {
+        /* Inner Page Content Animation */
+        .card, .container {
+            transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+        }
+
+        #page-1.turned .card {
             opacity: 0;
-            pointer-events: none;
+            transform: scale(0.95);
         }
 
-        body.show-page-2 #page-2 {
-            opacity: 1;
-            pointer-events: auto;
-            z-index: 3;
-        }
-
+        /* PAGE 1 CONTENT STYLES */
         .card {
             text-align: center;
             max-width: 800px;
@@ -122,7 +108,7 @@
             color: #d19595;
             font-weight: 400;
             line-height: 1;
-            margin-bottom: 0.2rem;
+            margin-bottom: -0.2em;
             text-shadow: 0 0 1px rgba(209, 149, 149, 0.2);
         }
 
@@ -166,6 +152,7 @@
             margin: 0 10px;
         }
 
+        /* PAGE 2 CONTENT STYLES */
         .container {
             max-width: 1000px;
             width: 100%;
@@ -233,148 +220,137 @@
             font-style: italic;
         }
 
+        /* Navigation Controls Overlay */
         .nav-controls {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 24px;
+            right: 24px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             z-index: 100;
-            background: rgba(25, 18, 16, 0.7);
-            backdrop-filter: blur(12px);
-            padding: 8px 18px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
 
         .nav-btn {
-            width: 38px;
-            height: 38px;
-            background-color: #fdf8f5;
-            color: #2b1e1a;
+            width: 36px;
+            height: 36px;
+            background-color: #1a1a1a;
+            color: #ffffff;
             border: none;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             user-select: none;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
         .nav-btn:hover:not(:disabled) {
             transform: scale(1.1);
-            background-color: #ffffff;
         }
 
         .nav-btn:disabled {
-            opacity: 0.25;
+            opacity: 0.3;
             cursor: not-allowed;
             transform: none;
         }
 
         .page-indicator {
             font-size: 0.85rem;
-            color: #e2d7d0;
-            letter-spacing: 0.12em;
+            color: #7a635a;
+            letter-spacing: 0.1em;
             font-family: sans-serif;
-            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
-    <canvas id="particles-canvas"></canvas>
+    <div class="pages-wrapper" id="wrapper">
+        <!-- PAGE 1 -->
+        <section id="page-1" class="page">
+            <main class="card">
+                <p class="subtitle-top">Today is your day</p>
+                <h2 class="script-heading">Happy Birthday</h2>
+                <h1 class="main-name">Maira</h1>
+                <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
+                
+                <div class="divider-container">
+                    <div class="divider-line"></div>
+                    <span class="heart-icon">&#9829;</span>
+                    <div class="divider-line"></div>
+                </div>
+            </main>
+        </section>
 
-    <div class="scene">
-        <div class="pages-wrapper">
-            <!-- PAGE 1 -->
-            <section id="page-1" class="page">
-                <main class="card">
-                    <p class="subtitle-top">Today is your day</p>
-                    <h2 class="script-heading">Happy Birthday</h2>
-                    <h1 class="main-name">Maira</h1>
-                    <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
-                    
-                    <div class="divider-container">
-                        <div class="divider-line"></div>
-                        <span class="heart-icon">&#9829;</span>
-                        <div class="divider-line"></div>
+        <!-- PAGE 2 -->
+        <section id="page-2" class="page">
+            <div class="container">
+                <header class="header">
+                    <p class="subtitle">A SMALL LIST</p>
+                    <h1 class="main-title">Ten reasons I love you</h1>
+                </header>
+
+                <main class="list-grid">
+                    <div class="list-item">
+                        <span class="number">01</span>
+                        <p class="text">The way you laugh when something really gets you</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">02</span>
+                        <p class="text italic">How you make every ordinary Tuesday feel like somewhere worth being</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">03</span>
+                        <p class="text">Your kindness &mdash; the quiet, everyday kind that most people never notice</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">04</span>
+                        <p class="text">The face you make right before you say something brilliant</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">05</span>
+                        <p class="text italic">How you remember the small things that matter to me</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">06</span>
+                        <p class="text">The way you dance when you think no one is watching</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">07</span>
+                        <p class="text">Your courage to be exactly who you are</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">08</span>
+                        <p class="text italic">That you make every room warmer just by being in it</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">09</span>
+                        <p class="text">How your voice sounds on slow mornings</p>
+                    </div>
+
+                    <div class="list-item">
+                        <span class="number">10</span>
+                        <p class="text">Simply that you exist &mdash; and somehow, you're mine</p>
                     </div>
                 </main>
-            </section>
-
-            <!-- PAGE 2 -->
-            <section id="page-2" class="page">
-                <div class="container">
-                    <header class="header">
-                        <p class="subtitle">A SMALL LIST</p>
-                        <h1 class="main-title">Ten reasons I love you</h1>
-                    </header>
-
-                    <main class="list-grid">
-                        <div class="list-item">
-                            <span class="number">01</span>
-                            <p class="text">The way you laugh when something really gets you</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">02</span>
-                            <p class="text italic">How you make every ordinary Tuesday feel like somewhere worth being</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">03</span>
-                            <p class="text">Your kindness &mdash; the quiet, everyday kind that most people never notice</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">04</span>
-                            <p class="text">The face you make right before you say something brilliant</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">05</span>
-                            <p class="text italic">How you remember the small things that matter to me</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">06</span>
-                            <p class="text">The way you dance when you think no one is watching</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">07</span>
-                            <p class="text">Your courage to be exactly who you are</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">08</span>
-                            <p class="text italic">That you make every room warmer just by being in it</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">09</span>
-                            <p class="text">How your voice sounds on slow mornings</p>
-                        </div>
-
-                        <div class="list-item">
-                            <span class="number">10</span>
-                            <p class="text">Simply that you exist &mdash; and somehow, you're mine</p>
-                        </div>
-                    </main>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </div>
 
-    <!-- Navigation Controls -->
+    <!-- Bottom Right Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
         <span class="page-indicator" id="page-indicator">1 / 2</span>
@@ -385,16 +361,16 @@
         let currentPage = 1;
         const totalPages = 2;
 
-        const body = document.body;
+        const page1 = document.getElementById('page-1');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
 
         function updateView() {
             if (currentPage === 2) {
-                body.classList.add('show-page-2');
+                page1.classList.add('turned');
             } else {
-                body.classList.remove('show-page-2');
+                page1.classList.remove('turned');
             }
 
             indicator.textContent = `${currentPage} / ${totalPages}`;
@@ -429,41 +405,6 @@
                 }
             }
         });
-
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const particles = Array.from({ length: 30 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 1.5 + 0.5,
-            speedY: -Math.random() * 0.3 - 0.1,
-            opacity: Math.random() * 0.4 + 0.2
-        }));
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.y += p.speedY;
-                if (p.y < 0) {
-                    p.y = canvas.height;
-                    p.x = Math.random() * canvas.width;
-                }
-                ctx.fillStyle = `rgba(220, 175, 175, ${p.opacity})`;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
     </script>
 </body>
 </html>
