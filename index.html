@@ -21,10 +21,10 @@
             background-color: #fdf8f5;
         }
 
-        /* Page Container & Smooth Transition Logic (3 Pages) */
+        /* Page Container & Smooth Transition Logic (4 Pages Now) */
         .pages-wrapper {
             display: flex;
-            width: 300vw;
+            width: 400vw;
             min-height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
         }
@@ -328,6 +328,54 @@
             display: block;
         }
 
+        /* PAGE 4 STYLES (Letter Page) */
+        #page-4 {
+            background-color: #fdf8f5;
+            background-image: radial-gradient(circle at center, rgba(255,230,225,0.7) 0%, rgba(253,248,245,1) 70%);
+        }
+
+        .letter-container {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+            text-align: left;
+        }
+
+        .letter-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            color: #d19595;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .letter-body {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #4a3c36;
+            margin-bottom: 2rem;
+        }
+
+        .letter-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .letter-divider {
+            height: 1px;
+            background-color: #e5bebe;
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+
+        .letter-footer {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: #d19595;
+            text-align: center;
+        }
+
         /* Fixed Music Toggle Button (Top Right) */
         .audio-toggle-fixed {
             position: fixed;
@@ -533,18 +581,42 @@
                 </div>
             </div>
         </section>
+
+        <!-- PAGE 4: LETTER PAGE -->
+        <section id="page-4" class="page">
+            <div class="letter-container">
+                <h1 class="letter-title">A letter, for you</h1>
+                
+                <div class="letter-body">
+                    <p style="font-size: 0.95rem; letter-spacing: 0.1em; color: #b88686; margin-bottom: 1.5rem;">On your birthday &mdash;</p>
+                    
+                    <p>There are people who change the shape of your days without meaning to. Who make you notice things you'd walked past a hundred times before. Who make ordinary light feel different.</p>
+                    
+                    <p>You are that person for me. Every day with you is evidence that I got more than I deserved.</p>
+                    
+                    <p>On this birthday, I want you to know, you are loved in the small ways and the big ones, in the Tuesday morning ways and the extraordinary ones. I see you, all of you, and what I see takes my breath away.</p>
+                    
+                    <p>Wishing you all the best in the future.</p>
+                    
+                    <p>Happy birthday, my hamster.</p>
+                </div>
+
+                <div class="letter-divider"></div>
+                <div class="letter-footer">Forever yours</div>
+            </div>
+        </section>
     </div>
 
     <!-- Bottom Right Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
-        <span class="page-indicator" id="page-indicator">1 / 3</span>
+        <span class="page-indicator" id="page-indicator">1 / 4</span>
         <button class="nav-btn" id="next-btn" title="Next Page">&rarr;</button>
     </div>
 
     <script>
         let currentPage = 1;
-        const totalPages = 3;
+        const totalPages = 4;
 
         const wrapper = document.getElementById('wrapper');
         const prevBtn = document.getElementById('prev-btn');
