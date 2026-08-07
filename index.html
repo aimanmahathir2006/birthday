@@ -64,10 +64,10 @@
             }
         }
 
-        /* Page Container & Smooth Transition Logic (5 Pages) */
+        /* Page Container & Smooth Transition Logic (6 Pages Now) */
         .pages-wrapper {
             display: flex;
-            width: 500vw;
+            width: 600vw;
             min-height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
             position: relative;
@@ -85,7 +85,102 @@
             position: relative;
         }
 
-        /* PAGE 1 STYLES */
+        /* INTRO WELCOME PAGE (PAGE 1) STYLES */
+        #page-welcome {
+            background-color: #fdf8f5;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 190, 190, 0.5);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .welcome-bunny-img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
+            animation: bounceGentle 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .welcome-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2b1e1a;
+            margin-bottom: 5px;
+        }
+
+        .welcome-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #d19595;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .welcome-prompt {
+            font-size: 0.95rem;
+            color: #7a635a;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Small Animated Love Heart requested for all pages */
+        .small-love-anim {
+            display: inline-block;
+            color: #b54949;
+            font-size: 0.85rem;
+            animation: pulseLove 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulseLove {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.35); }
+        }
+
+        .welcome-btn {
+            background-color: #d8a0a0;
+            color: #ffffff;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(216, 160, 160, 0.4);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .welcome-btn:hover {
+            background-color: #c78d8d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(216, 160, 160, 0.6);
+        }
+
+        /* PAGE 2 STYLES */
         #page-1 {
             background-color: #fdf8f5;
         }
@@ -182,7 +277,6 @@
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
         }
 
-        /* Hide Scrollbar */
         .lyrics-container::-webkit-scrollbar {
             display: none;
         }
@@ -226,9 +320,10 @@
             color: #b54949;
             font-size: 0.75rem;
             margin: 0 10px;
+            animation: pulseLove 1.2s ease-in-out infinite;
         }
 
-        /* PAGE 2 STYLES */
+        /* PAGE 3 STYLES */
         #page-2 {
             background-color: transparent;
         }
@@ -296,7 +391,7 @@
             font-weight: 400;
         }
 
-        /* PAGE 3 STYLES (Photo Gallery) */
+        /* PAGE 4 STYLES (Photo Gallery) */
         #page-3 {
             background-color: transparent;
         }
@@ -367,7 +462,7 @@
             display: block;
         }
 
-        /* PAGE 4 STYLES (Letter Page) */
+        /* PAGE 5 STYLES (Letter Page) */
         #page-4 {
             background-color: transparent;
         }
@@ -414,7 +509,7 @@
             text-align: center;
         }
 
-        /* PAGE 5 STYLES (Final Closing Page) */
+        /* PAGE 6 STYLES (Final Closing Page) */
         #page-5 {
             background-color: transparent;
             text-align: center;
@@ -465,6 +560,7 @@
         .final-badge span {
             color: #b54949;
             font-size: 0.75rem;
+            animation: pulseLove 1.2s ease-in-out infinite;
         }
 
         /* Fixed Music Toggle Button (Top Right) */
@@ -562,12 +658,26 @@
     <div class="floating-hearts-bg" id="hearts-bg"></div>
 
     <div class="pages-wrapper" id="wrapper">
+        <!-- WELCOME PAGE (MATCHING VIDEO REFERENCE) -->
+        <section id="page-welcome" class="page">
+            <div class="welcome-card">
+                <!-- Cute bunny image holding heart from video style -->
+                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f430.png" alt="Bunny" class="welcome-bunny-img" id="welcome-bunny">
+                <h2 class="welcome-title">Happy Birthday</h2>
+                <h1 class="welcome-name">Maira</h1>
+                <p class="welcome-prompt">Click the next button! <span class="small-love-anim">&#9829;</span> &lowast;(&#965;&#9697;&#9665;)&lowast; <span class="small-love-anim">&#9829;</span></p>
+                <button class="welcome-btn" id="start-btn">
+                    Next!! <span style="font-size: 0.9rem;" class="small-love-anim">&#9829;~</span>
+                </button>
+            </div>
+        </section>
+
         <!-- PAGE 1 -->
         <section id="page-1" class="page">
             <div class="p1-container">
                 <!-- Left Positioned Synced Lyric Box -->
                 <div class="lyric-box">
-                    <p class="lyric-title">BIAR SERIBU &mdash; NOH SALLEH</p>
+                    <p class="lyric-title">BIAR SERIBU &mdash; NOH SALLEH <span class="small-love-anim">&#9829;</span></p>
                     <div class="lyrics-container" id="lyrics-container">
                         <!-- Lyrics are rendered automatically here -->
                     </div>
@@ -593,7 +703,7 @@
         <section id="page-2" class="page">
             <div class="container">
                 <header class="header">
-                    <p class="subtitle">A SMALL LIST</p>
+                    <p class="subtitle">A SMALL LIST <span class="small-love-anim">&#9829;</span></p>
                     <h1 class="main-title">Ten reasons I love you</h1>
                 </header>
 
@@ -655,7 +765,7 @@
         <section id="page-3" class="page">
             <div class="gallery-container">
                 <header class="gallery-header">
-                    <h1 class="gallery-title-main">Our moments,</h1>
+                    <h1 class="gallery-title-main">Our moments, <span class="small-love-anim">&#9829;</span></h1>
                     <h2 class="gallery-title-sub">saved in my heart</h2>
                 </header>
 
@@ -679,7 +789,7 @@
         <!-- PAGE 4: LETTER PAGE -->
         <section id="page-4" class="page">
             <div class="letter-container">
-                <h1 class="letter-title">A letter, for you</h1>
+                <h1 class="letter-title">A letter, for you <span class="small-love-anim">&#9829;</span></h1>
                 
                 <div class="letter-body">
                     <p style="font-size: 0.95rem; letter-spacing: 0.1em; color: #b88686; margin-bottom: 1.5rem;">On your birthday &mdash;</p>
@@ -715,7 +825,7 @@
     <!-- Bottom Right Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
-        <span class="page-indicator" id="page-indicator">1 / 5</span>
+        <span class="page-indicator" id="page-indicator">1 / 6</span>
         <button class="nav-btn" id="next-btn" title="Next Page">&rarr;</button>
     </div>
 
@@ -756,12 +866,13 @@
         setInterval(createFloatingHeart, 800);
 
         let currentPage = 1;
-        const totalPages = 5;
+        const totalPages = 6;
 
         const wrapper = document.getElementById('wrapper');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
+        const startBtn = document.getElementById('start-btn');
 
         const audio = document.getElementById('bg-music');
         audio.volume = 0.4; // Sets default volume to 40%
@@ -881,8 +992,22 @@
             }
         });
 
+        startBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updateView();
+                // Attempt to auto-play audio on first user gesture if desired
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        fixedAudioIcon.textContent = '🔊';
+                        fixedAudioText.textContent = 'Pause';
+                    }).catch(e => console.log(e));
+                }
+            }
+        });
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') {
+            if (e.key === 'ArrowRight' || (e.key === ' ' && currentPage > 1)) {
                 if (currentPage < totalPages) {
                     currentPage++;
                     updateView();
