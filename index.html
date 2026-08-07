@@ -21,12 +21,57 @@
             background-color: #fdf8f5;
         }
 
-        /* Page Container & Smooth Transition Logic (5 Pages Now) */
+        /* Floating Animated Background Hearts Container */
+        .floating-hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            opacity: 0.35;
+            animation: floatUpAndSway linear infinite;
+        }
+
+        .floating-heart svg {
+            width: 100%;
+            height: 100%;
+            fill: #d8a0a0;
+        }
+
+        @keyframes floatUpAndSway {
+            0% {
+                transform: translateY(105vh) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.4;
+            }
+            80% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(30px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Page Container & Smooth Transition Logic (5 Pages) */
         .pages-wrapper {
             display: flex;
             width: 500vw;
             min-height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+            position: relative;
+            z-index: 2;
         }
 
         .page {
@@ -43,10 +88,6 @@
         /* PAGE 1 STYLES */
         #page-1 {
             background-color: #fdf8f5;
-            background-image: 
-                radial-gradient(circle at center, rgba(255,230,225,0.8) 0%, rgba(253,248,245,1) 70%),
-                url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cg id='heart'%3E%3Cpath fill='%23d8a0a0' opacity='0.35' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23heart' x='10%25' y='15%25' transform='scale(0.5)'/%3E%3Cuse href='%23heart' x='80%25' y='20%25' transform='scale(0.4)'/%3E%3Cuse href='%23heart' x='15%25' y='70%25' transform='scale(0.45)'/%3E%3Cuse href='%23heart' x='85%25' y='75%25' transform='scale(0.5)'/%3E%3Cuse href='%23heart' x='40%25' y='10%25' transform='scale(0.4)'/%3E%3Cuse href='%23heart' x='60%25' y='20%25' transform='scale(0.35)'/%3E%3Cuse href='%23heart' x='28%25' y='50%25' transform='scale(0.4)'/%3E%3Cuse href='%23heart' x='72%25' y='78%25' transform='scale(0.4)'/%3E%3C/svg%3E");
-            background-size: cover;
         }
 
         .p1-container {
@@ -189,8 +230,7 @@
 
         /* PAGE 2 STYLES */
         #page-2 {
-            background-color: #fdfaf6;
-            background-image: radial-gradient(circle at 85% 15%, rgba(255, 235, 225, 0.7) 0%, rgba(253, 250, 246, 1) 60%);
+            background-color: transparent;
         }
 
         .container {
@@ -258,8 +298,7 @@
 
         /* PAGE 3 STYLES (Photo Gallery) */
         #page-3 {
-            background-color: #fdf8f5;
-            background-image: radial-gradient(circle at center, rgba(255,230,225,0.5) 0%, rgba(253,248,245,1) 70%);
+            background-color: transparent;
         }
 
         .gallery-container {
@@ -330,8 +369,7 @@
 
         /* PAGE 4 STYLES (Letter Page) */
         #page-4 {
-            background-color: #fdf8f5;
-            background-image: radial-gradient(circle at center, rgba(255,230,225,0.7) 0%, rgba(253,248,245,1) 70%);
+            background-color: transparent;
         }
 
         .letter-container {
@@ -376,13 +414,9 @@
             text-align: center;
         }
 
-        /* PAGE 5 STYLES (Final Closing Page matching screenshot) */
+        /* PAGE 5 STYLES (Final Closing Page) */
         #page-5 {
-            background-color: #fdf8f5;
-            background-image: 
-                radial-gradient(circle at center, rgba(255,230,225,0.7) 0%, rgba(253,248,245,1) 70%),
-                url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cg id='heart'%3E%3Cpath fill='%23d8a0a0' opacity='0.35' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/g%3E%3C/defs%3E%3Cuse href='%23heart' x='50%25' y='5%25' transform='scale(0.3)'/%3E%3Cuse href='%23heart' x='47%25' y='5%25' transform='scale(0.35)'/%3E%3Cuse href='%23heart' x='53%25' y='5%25' transform='scale(0.35)'/%3E%3Cuse href='%23heart' x='44%25' y='5%25' transform='scale(0.3)'/%3E%3Cuse href='%23heart' x='56%25' y='5%25' transform='scale(0.3)'/%3E%3C/svg%3E");
-            background-size: cover;
+            background-color: transparent;
             text-align: center;
         }
 
@@ -523,6 +557,9 @@
         <span id="fixed-audio-icon">🎵</span>
         <span id="fixed-audio-text">Play Music</span>
     </button>
+
+    <!-- Floating Background Animated Hearts Layer -->
+    <div class="floating-hearts-bg" id="hearts-bg"></div>
 
     <div class="pages-wrapper" id="wrapper">
         <!-- PAGE 1 -->
@@ -683,6 +720,41 @@
     </div>
 
     <script>
+        // Generate continuous floating hearts in the background
+        const heartsBg = document.getElementById('hearts-bg');
+        const heartSvgPath = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+
+        function createFloatingHeart() {
+            const div = document.createElement('div');
+            div.className = 'floating-heart';
+            div.innerHTML = heartSvgPath;
+
+            // Random horizontal start position
+            const randomX = Math.random() * window.innerWidth;
+            div.style.left = randomX + 'px';
+
+            // Random animation duration between 7s and 14s
+            const duration = 7 + Math.random() * 7;
+            div.style.animationDuration = duration + 's';
+
+            // Random delay
+            const delay = Math.random() * 5;
+            div.style.animationDelay = delay + 's';
+
+            heartsBg.appendChild(div);
+
+            // Remove and recreate after animation finishes to keep DOM clean
+            setTimeout(() => {
+                div.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Initialize a set of floating hearts
+        for (let i = 0; i < 15; i++) {
+            createFloatingHeart();
+        }
+        setInterval(createFloatingHeart, 800);
+
         let currentPage = 1;
         const totalPages = 5;
 
