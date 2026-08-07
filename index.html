@@ -64,10 +64,10 @@
             }
         }
 
-        /* Page Container & Smooth Transition Logic (5 Pages) */
+        /* Page Container & Smooth Transition Logic (6 Pages Now) */
         .pages-wrapper {
             display: flex;
-            width: 500vw;
+            width: 600vw;
             min-height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
             position: relative;
@@ -141,7 +141,6 @@
             transform: scale(1.03);
         }
 
-        /* Envelope flap using CSS borders */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -211,7 +210,6 @@
             gap: 6px;
         }
 
-        /* Small Animated Love Heart requested for all pages */
         .small-love-anim {
             display: inline-block;
             color: #b54949;
@@ -267,7 +265,7 @@
             background-color: #d8cbcb;
         }
 
-        /* PAGE 2 STYLES */
+        /* PAGE 1 */
         #page-1 {
             background-color: #fdf8f5;
         }
@@ -334,7 +332,6 @@
             font-weight: 400;
         }
 
-        /* Side-Positioned Synced Lyric Box */
         .lyric-box {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(8px);
@@ -410,7 +407,7 @@
             animation: pulseLove 1.2s ease-in-out infinite;
         }
 
-        /* PAGE 3 STYLES */
+        /* PAGE 2 STYLES */
         #page-2 {
             background-color: transparent;
         }
@@ -478,7 +475,7 @@
             font-weight: 400;
         }
 
-        /* PAGE 4 STYLES (Photo Gallery) */
+        /* PAGE 3 STYLES (Photo Gallery) */
         #page-3 {
             background-color: transparent;
         }
@@ -549,8 +546,64 @@
             display: block;
         }
 
-        /* PAGE 5 STYLES (Letter Page) */
+        /* PAGE 4 STYLES (New "You make every single day worth it." Page matching user image) */
         #page-4 {
+            background-color: transparent;
+        }
+
+        .quote-page-container {
+            max-width: 750px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quote-page-hearts {
+            display: flex;
+            gap: 6px;
+            color: #d8a0a0;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            animation: pulseLove 1.2s ease-in-out infinite;
+        }
+
+        .quote-page-main {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 4.8rem);
+            font-weight: 700;
+            color: #2b1e1a;
+            line-height: 1.15;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .quote-page-sub {
+            font-size: 0.95rem;
+            color: #7a635a;
+            font-style: italic;
+            max-width: 400px;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+        }
+
+        .quote-page-badge {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(229, 190, 190, 0.6);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #7a635a;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* PAGE 5 STYLES (Letter Page) */
+        #page-5 {
             background-color: transparent;
         }
 
@@ -695,7 +748,6 @@
         <!-- WELCOME / ENVELOPE OPENING PAGE -->
         <section id="page-welcome" class="page">
             <div class="envelope-card" id="envelope-card">
-                <!-- Hamster Image Fixed -->
                 <img src="hamster.png" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/aimanmahathir2006/maira/main/hamster.png';" alt="Hamster" class="welcome-hamster-img" id="welcome-hamster">
                 <div class="envelope-graphic" id="envelope-graphic" title="Click to open envelope">
                     <div class="envelope-flap"></div>
@@ -714,15 +766,11 @@
         <!-- PAGE 1 -->
         <section id="page-1" class="page">
             <div class="p1-container">
-                <!-- Left Positioned Synced Lyric Box -->
                 <div class="lyric-box">
                     <p class="lyric-title">BIAR SERIBU &mdash; NOH SALLEH <span class="small-love-anim">&#9829;</span></p>
-                    <div class="lyrics-container" id="lyrics-container">
-                        <!-- Lyrics are rendered automatically here -->
-                    </div>
+                    <div class="lyrics-container" id="lyrics-container"></div>
                 </div>
 
-                <!-- Right Main Card -->
                 <main class="card">
                     <p class="subtitle-top">Today is your day <span class="small-love-anim">&#9829;</span></p>
                     <h2 class="script-heading">Happy Birthday</h2>
@@ -751,47 +799,38 @@
                         <span class="number">01</span>
                         <p class="text">The way you laugh when something really gets you <span class="small-love-anim">&#9829;</span></p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">02</span>
                         <p class="text">How you make even ordinary days feel like something worth remembering</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">03</span>
                         <p class="text">How you remember the small things that matter to me</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">04</span>
                         <p class="text">How safe I feel just being next to you</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">05</span>
                         <p class="text">That you're always patient with me</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">06</span>
                         <p class="text">The way you care quietly, deeply, without making a show of it</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">07</span>
                         <p class="text">The way your presence alone could completely change the heavy days into lighter ones</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">08</span>
                         <p class="text">How effortless it felt to simply exist in the same room with you, without needing to fill the silence</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">09</span>
                         <p class="text">The way you always knew exactly what to say to anchor me when my thoughts were spinning out of control</p>
                     </div>
-
                     <div class="list-item">
                         <span class="number">10</span>
                         <p class="text">The fact that you exist, and that you chose me once</p>
@@ -809,38 +848,39 @@
                 </header>
 
                 <div class="photos-grid">
-                    <div class="photo-card">
-                        <img src="date1.jpg" alt="Memory 1">
-                    </div>
-                    <div class="photo-card">
-                        <img src="date2.jpg" alt="Memory 2">
-                    </div>
-                    <div class="photo-card">
-                        <img src="date3.jpg" alt="Memory 3">
-                    </div>
-                    <div class="photo-card">
-                        <img src="date5.jpg" alt="Memory 4">
-                    </div>
+                    <div class="photo-card"><img src="date1.jpg" alt="Memory 1"></div>
+                    <div class="photo-card"><img src="date2.jpg" alt="Memory 2"></div>
+                    <div class="photo-card"><img src="date3.jpg" alt="Memory 3"></div>
+                    <div class="photo-card"><img src="date5.jpg" alt="Memory 4"></div>
                 </div>
             </div>
         </section>
 
-        <!-- PAGE 4: LETTER PAGE -->
+        <!-- PAGE 4: MISSING QUOTE PAGE (Restored from your screenshot) -->
         <section id="page-4" class="page">
+            <div class="quote-page-container">
+                <div class="quote-page-hearts">
+                    <span>&#9829;</span><span>&#9829;</span><span>&#9829;</span><span>&#9829;</span><span>&#9829;</span>
+                </div>
+                <h1 class="quote-page-main">You make<br>every<br>single day<br>worth it.</h1>
+                <p class="quote-page-sub">Wishing you a birthday as beautiful as you make my life.</p>
+                <div class="quote-page-badge">
+                    <span>&#9829;</span> With all my love, always <span>&#9829;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: LETTER PAGE -->
+        <section id="page-5" class="page">
             <div class="letter-container">
                 <h1 class="letter-title">A letter, for you <span class="small-love-anim">&#9829;</span></h1>
                 
                 <div class="letter-body">
                     <p style="font-size: 0.95rem; letter-spacing: 0.1em; color: #b88686; margin-bottom: 1.5rem;">On your birthday &mdash; <span class="small-love-anim">&#9829;</span></p>
-                    
                     <p>There are people who change the shape of your days without meaning to. Who make you notice things you'd walked past a hundred times before. Who make ordinary light feel different.</p>
-                    
                     <p>You are that person for me. Every day with you is evidence that I got more than I deserved.</p>
-                    
                     <p>On this birthday, I want you to know, you are loved in the small ways and the big ones, in the Tuesday morning ways and the extraordinary ones. I see you, all of you, and what I see takes my breath away.</p>
-                    
                     <p>Wishing you all the best in the future.</p>
-                    
                     <p>Happy birthday, my hamster <span class="small-love-anim">&#9829;</span></p>
                 </div>
 
@@ -853,12 +893,11 @@
     <!-- Bottom Right Controls -->
     <div class="nav-controls" id="nav-controls" style="opacity: 0; pointer-events: none;">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
-        <span class="page-indicator" id="page-indicator">1 / 5</span>
+        <span class="page-indicator" id="page-indicator">1 / 6</span>
         <button class="nav-btn" id="next-btn" title="Next Page">&rarr;</button>
     </div>
 
     <script>
-        // Generate continuous floating hearts in the background
         const heartsBg = document.getElementById('hearts-bg');
         const heartSvgPath = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
 
@@ -866,30 +905,21 @@
             const div = document.createElement('div');
             div.className = 'floating-heart';
             div.innerHTML = heartSvgPath;
-
             const randomX = Math.random() * window.innerWidth;
             div.style.left = randomX + 'px';
-
             const duration = 7 + Math.random() * 7;
             div.style.animationDuration = duration + 's';
-
             const delay = Math.random() * 5;
             div.style.animationDelay = delay + 's';
-
             heartsBg.appendChild(div);
-
-            setTimeout(() => {
-                div.remove();
-            }, (duration + delay) * 1000);
+            setTimeout(() => { div.remove(); }, (duration + delay) * 1000);
         }
 
-        for (let i = 0; i < 15; i++) {
-            createFloatingHeart();
-        }
+        for (let i = 0; i < 15; i++) { createFloatingHeart(); }
         setInterval(createFloatingHeart, 800);
 
         let currentPage = 1;
-        const totalPages = 5;
+        const totalPages = 6;
 
         const wrapper = document.getElementById('wrapper');
         const prevBtn = document.getElementById('prev-btn');
@@ -1002,7 +1032,6 @@
             prevBtn.disabled = currentPage === 1;
             nextBtn.disabled = currentPage === totalPages;
 
-            // Show navigation controls only after opening the envelope (Page >= 2)
             if (currentPage > 1) {
                 navControls.style.opacity = '1';
                 navControls.style.pointerEvents = 'auto';
