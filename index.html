@@ -64,7 +64,7 @@
             }
         }
 
-        /* Page Container & Smooth Transition Logic (Back to 5 Pages) */
+        /* Page Container & Smooth Transition Logic (5 Pages) */
         .pages-wrapper {
             display: flex;
             width: 500vw;
@@ -85,7 +85,7 @@
             position: relative;
         }
 
-        /* INTRO WELCOME / ENVELOPE OPENING PAGE (MATCHING VIDEO REFERENCE) */
+        /* INTRO WELCOME / ENVELOPE OPENING PAGE */
         #page-welcome {
             background-color: #fdf8f5;
         }
@@ -104,6 +104,21 @@
             flex-direction: column;
             align-items: center;
             transition: all 0.5s ease;
+        }
+
+        /* Hamster Graphic / Image Styling */
+        .welcome-hamster-img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
+            animation: bounceGentle 2s ease-in-out infinite;
+        }
+
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         /* Envelope Graphics */
@@ -185,14 +200,6 @@
             font-weight: 700;
             color: #2b1e1a;
             margin-bottom: 5px;
-        }
-
-        .welcome-name {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: #d19595;
-            margin-bottom: 15px;
-            line-height: 1;
         }
 
         .welcome-prompt {
@@ -497,7 +504,7 @@
 
         .gallery-title-sub {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.0rem, 4vw, 3rem);
             color: #d19595;
             font-weight: 400;
         }
@@ -625,6 +632,7 @@
             align-items: center;
             gap: 12px;
             z-index: 100;
+            transition: opacity 0.3s ease;
         }
 
         .nav-btn {
@@ -684,16 +692,18 @@
     <div class="floating-hearts-bg" id="hearts-bg"></div>
 
     <div class="pages-wrapper" id="wrapper">
-        <!-- WELCOME / ENVELOPE OPENING PAGE (MATCHING VIDEO REFERENCE) -->
+        <!-- WELCOME / ENVELOPE OPENING PAGE -->
         <section id="page-welcome" class="page">
             <div class="envelope-card" id="envelope-card">
+                <!-- Hamster Emoji/Image -->
+                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f439.png" alt="Hamster" class="welcome-hamster-img" id="welcome-hamster">
                 <div class="envelope-graphic" id="envelope-graphic" title="Click to open envelope">
                     <div class="envelope-flap"></div>
                     <div class="envelope-seal">&#9829;</div>
                     <div class="envelope-letter-preview">&#9829; Maira</div>
                 </div>
                 <h2 class="welcome-title">Do you want to open it?</h2>
-                <p class="welcome-prompt">*(｡&gt;﹏&lt;｡)* <span class="small-love-anim">&#9829;</span></p>
+                <p class="welcome-prompt">*(｡>﹏<｡)* <span class="small-love-anim">&#9829;</span></p>
                 <div class="envelope-actions">
                     <button class="env-btn-open" id="open-env-btn">Open it <span class="small-love-anim">&#9829;</span></button>
                     <button class="env-btn-no" id="no-env-btn">No ty</button>
@@ -841,7 +851,7 @@
     </div>
 
     <!-- Bottom Right Controls -->
-    <div class="nav-controls">
+    <div class="nav-controls" id="nav-controls" style="opacity: 0; pointer-events: none;">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
         <span class="page-indicator" id="page-indicator">1 / 5</span>
         <button class="nav-btn" id="next-btn" title="Next Page">&rarr;</button>
@@ -857,27 +867,22 @@
             div.className = 'floating-heart';
             div.innerHTML = heartSvgPath;
 
-            // Random horizontal start position
             const randomX = Math.random() * window.innerWidth;
             div.style.left = randomX + 'px';
 
-            // Random animation duration between 7s and 14s
             const duration = 7 + Math.random() * 7;
             div.style.animationDuration = duration + 's';
 
-            // Random delay
             const delay = Math.random() * 5;
             div.style.animationDelay = delay + 's';
 
             heartsBg.appendChild(div);
 
-            // Remove and recreate after animation finishes to keep DOM clean
             setTimeout(() => {
                 div.remove();
             }, (duration + delay) * 1000);
         }
 
-        // Initialize a set of floating hearts
         for (let i = 0; i < 15; i++) {
             createFloatingHeart();
         }
@@ -890,6 +895,7 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
+        const navControls = document.getElementById('nav-controls');
         
         const envelopeCard = document.getElementById('envelope-card');
         const envelopeGraphic = document.getElementById('envelope-graphic');
@@ -897,7 +903,7 @@
         const noEnvBtn = document.getElementById('no-env-btn');
 
         const audio = document.getElementById('bg-music');
-        audio.volume = 0.4; // Sets default volume to 40%
+        audio.volume = 0.4;
 
         const fixedAudioBtn = document.getElementById('fixed-audio-btn');
         const fixedAudioIcon = document.getElementById('fixed-audio-icon');
@@ -905,7 +911,6 @@
 
         const lyricsContainer = document.getElementById('lyrics-container');
 
-        // Synced song timings
         const songData = [
             { time: 3.84, text: "Biar seribu tahun lagi" },
             { time: 11.63, text: "'Ku 'kan menunggu kau di sana" },
@@ -932,7 +937,6 @@
             { time: 222.46, text: "Biar seribu" }
         ];
 
-        // Render lyrics dynamically
         function renderLyrics() {
             lyricsContainer.innerHTML = '';
             songData.forEach((item) => {
@@ -964,7 +968,6 @@
 
         fixedAudioBtn.addEventListener('click', toggleAudio);
 
-        /* Lyrics Sync & Auto-scroll Logic */
         audio.addEventListener('timeupdate', () => {
             const lyricLines = document.querySelectorAll('.lyric-line');
             const currentTime = audio.currentTime;
@@ -998,6 +1001,15 @@
             
             prevBtn.disabled = currentPage === 1;
             nextBtn.disabled = currentPage === totalPages;
+
+            // Show navigation controls only after opening the envelope (Page >= 2)
+            if (currentPage > 1) {
+                navControls.style.opacity = '1';
+                navControls.style.pointerEvents = 'auto';
+            } else {
+                navControls.style.opacity = '0';
+                navControls.style.pointerEvents = 'none';
+            }
         }
 
         prevBtn.addEventListener('click', () => {
@@ -1038,15 +1050,17 @@
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || (e.key === ' ' && currentPage > 1)) {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    updateView();
-                }
-            } else if (e.key === 'ArrowLeft') {
-                if (currentPage > 1) {
-                    currentPage--;
-                    updateView();
+            if (currentPage > 1) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        updateView();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        updateView();
+                    }
                 }
             }
         });
