@@ -64,10 +64,10 @@
             }
         }
 
-        /* Page Container & Smooth Transition Logic (6 Pages Now) */
+        /* Page Container & Smooth Transition Logic (Back to 5 Pages) */
         .pages-wrapper {
             display: flex;
-            width: 600vw;
+            width: 500vw;
             min-height: 100vh;
             transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
             position: relative;
@@ -85,12 +85,12 @@
             position: relative;
         }
 
-        /* INTRO WELCOME PAGE (PAGE 1) STYLES */
+        /* INTRO WELCOME / ENVELOPE OPENING PAGE (MATCHING VIDEO REFERENCE) */
         #page-welcome {
             background-color: #fdf8f5;
         }
 
-        .welcome-card {
+        .envelope-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(229, 190, 190, 0.5);
@@ -103,20 +103,80 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: all 0.5s ease;
         }
 
-        .welcome-bunny-img {
-            width: 90px;
+        /* Envelope Graphics */
+        .envelope-graphic {
+            position: relative;
+            width: 180px;
+            height: 120px;
+            background: #f7e1e1;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-graphic:hover {
+            transform: scale(1.03);
+        }
+
+        /* Envelope flap using CSS borders */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 90px solid transparent;
+            border-right: 90px solid transparent;
+            border-top: 70px solid #e8c4c4;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+        }
+
+        .envelope-card.opened .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope-seal {
+            position: absolute;
+            z-index: 4;
+            color: #b54949;
+            font-size: 1.5rem;
+            animation: pulseLove 1.2s ease-in-out infinite;
+            top: 30px;
+        }
+
+        .envelope-letter-preview {
+            position: absolute;
+            width: 150px;
             height: 90px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.06));
-            animation: bounceGentle 2s ease-in-out infinite;
+            background: #fff;
+            border-radius: 4px;
+            top: 15px;
+            transition: transform 0.6s ease;
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.2rem;
+            color: #d19595;
         }
 
-        @keyframes bounceGentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        .envelope-card.opened .envelope-letter-preview {
+            transform: translateY(-40px);
+            z-index: 2;
         }
 
         .welcome-title {
@@ -157,27 +217,47 @@
             50% { transform: scale(1.35); }
         }
 
-        .welcome-btn {
+        .envelope-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .env-btn-open {
             background-color: #d8a0a0;
             color: #ffffff;
             border: none;
-            padding: 12px 32px;
-            border-radius: 30px;
+            padding: 10px 24px;
+            border-radius: 20px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(216, 160, 160, 0.4);
             transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .welcome-btn:hover {
+        .env-btn-open:hover {
             background-color: #c78d8d;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(216, 160, 160, 0.6);
+        }
+
+        .env-btn-no {
+            background-color: #e5d8d8;
+            color: #7a635a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .env-btn-no:hover {
+            background-color: #d8cbcb;
         }
 
         /* PAGE 2 STYLES */
@@ -509,60 +589,6 @@
             text-align: center;
         }
 
-        /* PAGE 6 STYLES (Final Closing Page) */
-        #page-5 {
-            background-color: transparent;
-            text-align: center;
-        }
-
-        .final-container {
-            max-width: 750px;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .final-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 700;
-            color: #2b1e1a;
-            line-height: 1.15;
-            margin-bottom: 2.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .final-subtitle {
-            font-size: 0.95rem;
-            font-style: italic;
-            color: #7a635a;
-            letter-spacing: 0.05em;
-            margin-bottom: 2.5rem;
-        }
-
-        .final-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(235, 205, 200, 0.4);
-            border: 1px solid rgba(220, 180, 175, 0.6);
-            padding: 10px 24px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: #5c443d;
-            letter-spacing: 0.05em;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-        }
-
-        .final-badge span {
-            color: #b54949;
-            font-size: 0.75rem;
-            animation: pulseLove 1.2s ease-in-out infinite;
-        }
-
         /* Fixed Music Toggle Button (Top Right) */
         .audio-toggle-fixed {
             position: fixed;
@@ -658,17 +684,20 @@
     <div class="floating-hearts-bg" id="hearts-bg"></div>
 
     <div class="pages-wrapper" id="wrapper">
-        <!-- WELCOME PAGE (MATCHING VIDEO REFERENCE) -->
+        <!-- WELCOME / ENVELOPE OPENING PAGE (MATCHING VIDEO REFERENCE) -->
         <section id="page-welcome" class="page">
-            <div class="welcome-card">
-                <!-- Cute bunny image holding heart from video style -->
-                <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f430.png" alt="Bunny" class="welcome-bunny-img" id="welcome-bunny">
-                <h2 class="welcome-title">Happy Birthday</h2>
-                <h1 class="welcome-name">Maira</h1>
-                <p class="welcome-prompt">Click the next button! <span class="small-love-anim">&#9829;</span> &lowast;(&#965;&#9697;&#9665;)&lowast; <span class="small-love-anim">&#9829;</span></p>
-                <button class="welcome-btn" id="start-btn">
-                    Next!! <span style="font-size: 0.9rem;" class="small-love-anim">&#9829;~</span>
-                </button>
+            <div class="envelope-card" id="envelope-card">
+                <div class="envelope-graphic" id="envelope-graphic" title="Click to open envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-seal">&#9829;</div>
+                    <div class="envelope-letter-preview">&#9829; Maira</div>
+                </div>
+                <h2 class="welcome-title">Do you want to open it?</h2>
+                <p class="welcome-prompt">*(｡&gt;﹏&lt;｡)* <span class="small-love-anim">&#9829;</span></p>
+                <div class="envelope-actions">
+                    <button class="env-btn-open" id="open-env-btn">Open it <span class="small-love-anim">&#9829;</span></button>
+                    <button class="env-btn-no" id="no-env-btn">No ty</button>
+                </div>
             </div>
         </section>
 
@@ -685,7 +714,7 @@
 
                 <!-- Right Main Card -->
                 <main class="card">
-                    <p class="subtitle-top">Today is your day</p>
+                    <p class="subtitle-top">Today is your day <span class="small-love-anim">&#9829;</span></p>
                     <h2 class="script-heading">Happy Birthday</h2>
                     <h1 class="main-name">Maira</h1>
                     <p class="quote">On this day, the world became a better place &mdash; and I am the luckiest person in it.</p>
@@ -710,7 +739,7 @@
                 <main class="list-grid">
                     <div class="list-item">
                         <span class="number">01</span>
-                        <p class="text">The way you laugh when something really gets you</p>
+                        <p class="text">The way you laugh when something really gets you <span class="small-love-anim">&#9829;</span></p>
                     </div>
 
                     <div class="list-item">
@@ -792,7 +821,7 @@
                 <h1 class="letter-title">A letter, for you <span class="small-love-anim">&#9829;</span></h1>
                 
                 <div class="letter-body">
-                    <p style="font-size: 0.95rem; letter-spacing: 0.1em; color: #b88686; margin-bottom: 1.5rem;">On your birthday &mdash;</p>
+                    <p style="font-size: 0.95rem; letter-spacing: 0.1em; color: #b88686; margin-bottom: 1.5rem;">On your birthday &mdash; <span class="small-love-anim">&#9829;</span></p>
                     
                     <p>There are people who change the shape of your days without meaning to. Who make you notice things you'd walked past a hundred times before. Who make ordinary light feel different.</p>
                     
@@ -802,22 +831,11 @@
                     
                     <p>Wishing you all the best in the future.</p>
                     
-                    <p>Happy birthday, my hamster.</p>
+                    <p>Happy birthday, my hamster <span class="small-love-anim">&#9829;</span></p>
                 </div>
 
                 <div class="letter-divider"></div>
-                <div class="letter-footer">Forever yours</div>
-            </div>
-        </section>
-
-        <!-- PAGE 5: FINAL CLOSING PAGE -->
-        <section id="page-5" class="page">
-            <div class="final-container">
-                <h1 class="final-title">You make every<br>single day<br>worth it.</h1>
-                <p class="final-subtitle">Wishing you a birthday as beautiful as you make my life.</p>
-                <div class="final-badge">
-                    <span>&#9829;</span> With all my love, always <span>&#9829;</span>
-                </div>
+                <div class="letter-footer">Forever yours <span class="small-love-anim">&#9829;</span></div>
             </div>
         </section>
     </div>
@@ -825,7 +843,7 @@
     <!-- Bottom Right Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prev-btn" title="Previous Page" disabled>&larr;</button>
-        <span class="page-indicator" id="page-indicator">1 / 6</span>
+        <span class="page-indicator" id="page-indicator">1 / 5</span>
         <button class="nav-btn" id="next-btn" title="Next Page">&rarr;</button>
     </div>
 
@@ -866,13 +884,17 @@
         setInterval(createFloatingHeart, 800);
 
         let currentPage = 1;
-        const totalPages = 6;
+        const totalPages = 5;
 
         const wrapper = document.getElementById('wrapper');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const indicator = document.getElementById('page-indicator');
-        const startBtn = document.getElementById('start-btn');
+        
+        const envelopeCard = document.getElementById('envelope-card');
+        const envelopeGraphic = document.getElementById('envelope-graphic');
+        const openEnvBtn = document.getElementById('open-env-btn');
+        const noEnvBtn = document.getElementById('no-env-btn');
 
         const audio = document.getElementById('bg-music');
         audio.volume = 0.4; // Sets default volume to 40%
@@ -992,18 +1014,27 @@
             }
         });
 
-        startBtn.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                updateView();
-                // Attempt to auto-play audio on first user gesture if desired
-                if (audio.paused) {
-                    audio.play().then(() => {
-                        fixedAudioIcon.textContent = '🔊';
-                        fixedAudioText.textContent = 'Pause';
-                    }).catch(e => console.log(e));
-                }
+        function triggerOpenEnvelope() {
+            envelopeCard.classList.add('opened');
+            if (audio.paused) {
+                audio.play().then(() => {
+                    fixedAudioIcon.textContent = '🔊';
+                    fixedAudioText.textContent = 'Pause';
+                }).catch(e => console.log(e));
             }
+            setTimeout(() => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateView();
+                }
+            }, 600);
+        }
+
+        envelopeGraphic.addEventListener('click', triggerOpenEnvelope);
+        openEnvBtn.addEventListener('click', triggerOpenEnvelope);
+
+        noEnvBtn.addEventListener('click', () => {
+            alert("Awh... Let's try again? PLEASEE? 🥺❤️");
         });
 
         document.addEventListener('keydown', (e) => {
