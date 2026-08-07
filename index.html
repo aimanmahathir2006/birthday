@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +21,7 @@
             background-color: #fdf8f5;
         }
 
-        /* Page Container & Smooth Transition Logic (3 Pages Now) */
+        /* Page Container & Smooth Transition Logic (3 Pages) */
         .pages-wrapper {
             display: flex;
             width: 300vw;
@@ -202,7 +201,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
 
         .subtitle {
@@ -210,13 +209,13 @@
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: #d8b8ac;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 500;
         }
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             color: #2c1d18;
             letter-spacing: -0.01em;
@@ -225,25 +224,25 @@
         .list-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem 4rem;
+            gap: 1.5rem 3rem;
             align-items: start;
         }
 
         @media (max-width: 768px) {
             .list-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1.2rem;
             }
         }
 
         .list-item {
             display: flex;
             align-items: baseline;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .number {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #e6c5b8;
             font-weight: 600;
             min-width: 2rem;
@@ -251,14 +250,10 @@
         }
 
         .text {
-            font-size: 1.15rem;
-            line-height: 1.5;
+            font-size: 1.05rem;
+            line-height: 1.4;
             color: #4a3c36;
             font-weight: 400;
-        }
-
-        .italic {
-            font-style: italic;
         }
 
         /* PAGE 3 STYLES (Photo Gallery) */
@@ -468,47 +463,47 @@
 
                     <div class="list-item">
                         <span class="number">02</span>
-                        <p class="text italic">How you make every ordinary Tuesday feel like somewhere worth being</p>
+                        <p class="text">How you make even ordinary days feel like something worth remembering</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">03</span>
-                        <p class="text">Your kindness &mdash; the quiet, everyday kind that most people never notice</p>
+                        <p class="text">How you remember the small things that matter to me</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">04</span>
-                        <p class="text">The face you make right before you say something brilliant</p>
+                        <p class="text">How safe I feel just being next to you</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">05</span>
-                        <p class="text italic">How you remember the small things that matter to me</p>
+                        <p class="text">That you're always patient with me</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">06</span>
-                        <p class="text">The way you dance when you think no one is watching</p>
+                        <p class="text">The way you care quietly, deeply, without making a show of it</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">07</span>
-                        <p class="text">Your courage to be exactly who you are</p>
+                        <p class="text">The way your presence alone could completely change the heavy days into lighter ones</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">08</span>
-                        <p class="text italic">That you make every room warmer just by being in it</p>
+                        <p class="text">How effortless it felt to simply exist in the same room with you, without needing to fill the silence</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">09</span>
-                        <p class="text">How your voice sounds on slow mornings</p>
+                        <p class="text">The way you always knew exactly what to say to anchor me when my thoughts were spinning out of control</p>
                     </div>
 
                     <div class="list-item">
                         <span class="number">10</span>
-                        <p class="text">Simply that you exist &mdash; and somehow, you're mine</p>
+                        <p class="text">The fact that you exist, and that you chose me once</p>
                     </div>
                 </main>
             </div>
@@ -565,7 +560,7 @@
 
         const lyricsContainer = document.getElementById('lyrics-container');
 
-        // Synced song timings converted from your exact timestamp file
+        // Synced song timings
         const songData = [
             { time: 3.84, text: "Biar seribu tahun lagi" },
             { time: 11.63, text: "'Ku 'kan menunggu kau di sana" },
